@@ -1,3 +1,4 @@
+import config
 import time
 from pypresence import Presence
 # Read cfg
@@ -7,7 +8,11 @@ try:
         lines = file.readlines()
 # If cfg file not found
 except FileNotFoundError:
-    print("The file 'main.cfg' was not found.")
+    # Generate Config
+    config.missing_cfg()
+    # Retry Reading
+    with open('main.cfg', 'r') as file:
+        lines = file.readlines()
 # Get the third line (index 2, since Python uses zero-based indexing)
 line3 = lines[2]  # This Was Client ID
 line4 = lines[3]  # State
